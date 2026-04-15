@@ -17,9 +17,10 @@ logs information are highlighted with different levels
 ## Project Structure
 
 ```
-nodered-auth-app/
+ether/
 ├── public/index.html
-├── src/
+├── src/    
+│   ├──components/DebugBiwer.jsx  ← Debug view and save
 │   ├── context/AuthContext.jsx   ← All auth logic (Google, Facebook, local)
 │   ├── hooks/useNodeRed.js       ← Node-RED WebSocket + flow data
 │   ├── pages/
@@ -29,14 +30,14 @@ nodered-auth-app/
 │   └── index.js
 ├── node-red-auth-flows.json      ← Import this into Node-RED
 └── package.json
-```
+
 
 ## Quick Start
 
-### 1\. Install \& run the React app
+### 1 Install \& run the Ether
 
 ```bash
-cd nodered-auth-app
+cd ControlPlane
 npm install
 npm start
 # Opens at http://localhost:3000

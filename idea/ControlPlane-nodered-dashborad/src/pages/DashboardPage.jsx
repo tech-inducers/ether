@@ -382,7 +382,7 @@ export default function DashboardPage() {
         <header style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'10px 20px', borderBottom:`1px solid ${C.border}`, background:C.bg2, flexShrink:0, gap:'12px' }}>
           <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
             <Logo size={30}/>
-            <span style={{ fontFamily:"'Clash Display',sans-serif", fontWeight:'700', fontSize:'16px', color:'#fff', letterSpacing:'-.02em' }}>Ether Flow<span style={{color:C.active}}>.</span></span>
+            <span style={{ fontFamily:"'Clash Display',sans-serif", fontWeight:'700', fontSize:'16px', color:'#fff', letterSpacing:'-.02em' }}>Ether<span style={{color:C.active}}>.</span></span>
           </div>
 
           {/* Connection info */}
