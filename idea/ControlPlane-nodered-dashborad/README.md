@@ -1,7 +1,7 @@
 # Etherflow —  Dashboard for Node-RED with  real-time monitoring and live status
 
-![](https://raw.githubusercontent.com/tech-inducers/ether/idea/ControlPlane-nodered-dashborad/images/image1.png)
-![](https://raw.githubusercontent.com/tech-inducers/ether/idea/ControlPlane-nodered-dashborad/images/image2.png)
+![](https://raw.githubusercontent.com/tech-inducers/ether/idea/ControlPlane-nodered-dashborad/images/EtherFlow_screenShot.png)
+![](https://raw.githubusercontent.com/tech-inducers/ether/idea/ControlPlane-nodered-dashborad/images/image1-png)
 
 
 
