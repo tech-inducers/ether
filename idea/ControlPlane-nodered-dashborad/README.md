@@ -1,4 +1,4 @@
-# ether Flow —  Dashboard for Node-RED for real-time monitoring with live status
+# ether —  Dashboard for Node-RED with  real-time monitoring and live status
 
 
 ## Features
