@@ -2,12 +2,36 @@
 
 
 
-## Features
-* React app connecting Node-RED with Google OAuth, Facebook OAuth, and local authentication.
-* Can be configured fully with authentication and the details of monitoring for NodeRed
-* Dashboard can execute Node-Red flow, view in progress and provide log information
-* Log information for last run of flow can be viewed and saved in the flow canvas
-* logs information are highlighted with different levels
+## Dashboard Features
+
+**Authentication**
+
+* Dashboard connects Node-RED with Google OAuth, Facebook OAuth, and local authentication
+* NodeRed url can be configured from Dashboard to get live feed
+
+
+**Flow Canvas**
+
+* Live SVG flow visualization with animated connectors
+* Per-node status: idle / running / done / warn / error
+* Execution time overlays and sparkline history
+* Per-node timing bars
+
+**Debug Logs**
+
+* Filterable by level (DEBUG / INFO / WARN / ERROR)
+* Full-text search
+* Payload inspector on click
+* WebSocket live feed from Node-RED
+
+**Config Tab**
+
+* Node-RED URL configuration
+* Auth provider status overview
+* Setup guide for Google \& Facebook
+
+
+
 
 
 ![](https://raw.githubusercontent.com/tech-inducers/ether/main/images/login.png)
@@ -122,30 +146,8 @@ process.env.FACEBOOK\_APP\_SECRET = 'your-app-secret';
 Create `.env` in the project root:
 
 ```
-REACT\_APP\_NR\_URL=http://localhost:1880
+NodeRed default URL=http://localhost:1880
 ```
 
 \---
-
-## Dashboard Features
-
-**Flow Canvas**
-
-* Live SVG flow visualization with animated connectors
-* Per-node status: idle / running / done / warn / error
-* Execution time overlays and sparkline history
-* Per-node timing bars
-
-**Debug Logs**
-
-* Filterable by level (DEBUG / INFO / WARN / ERROR)
-* Full-text search
-* Payload inspector on click
-* WebSocket live feed from Node-RED
-
-**Config Tab**
-
-* Node-RED URL configuration
-* Auth provider status overview
-* Setup guide for Google \& Facebook
 
