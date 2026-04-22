@@ -13,7 +13,7 @@
 
 
 ## Features
-* Distributed in design - can generate, validate and run agents on remote/local/cloud environment 
+* Distributed by design - can generate, validate and run agents on remote/local/cloud environment 
 * Components: 
            *Control Plane - execute and monitor agents
            *Design Plane  - generate agent ,agent with integration protocol support defined in the flow
