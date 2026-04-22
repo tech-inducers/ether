@@ -36,7 +36,7 @@ https://ollama.com/
 -----------------------------------------------------------------------------
 
 
-Download Flow.json including generate, validate and run configuration 
+Download local_exec configuration -incudes generate, validate and run configuration as shown in the above picture.
 
 https://github.com/tech-inducers/ether/tree/main/idea/marketplace/local_env
 
