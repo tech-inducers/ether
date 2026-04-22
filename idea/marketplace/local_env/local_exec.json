@@ -1,0 +1,378 @@
+[
+    {
+        "id": "516beec7ec6da616",
+        "type": "my-custom-node",
+        "z": "a151fd919366c960",
+        "name": "LLM configuration for Agent",
+        "mode": "json",
+        "jsonContent": "{\n  \"model\": \"gemma4:e4b\",\n  \"inference engine\": \"ollama\",\n  \"manual_context_override\": 4096,\n  \"dataset_path\": \"user_instruction.json\",\n  \"tools\": [\n    {\n      \"tool name\": \"ShellTools\"\n    },\n    {\n      \"tool name\": \"DuckDuckGoTools\"\n    },\n    {\n      \"tool name\": \"CsvTools\",\n      \"enable_query_csv_file\": false,\n      \"csvs\": [\n        \"alarm_data.csv\",\n        \"performance_data.csv\",\n        \"test.csv\"\n      ]\n    },\n    {\n      \"tool name\": \"FileTools\"\n    },\n    {\n      \"tool name\": \"PythonTools\"\n    }\n  ],\n  \"markdown\": true\n}",
+        "textContent": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "234844e3557dec53",
+                "13d8f1552101351a"
+            ]
+        ]
+    },
+    {
+        "id": "148b7fd53586b4b7",
+        "type": "my-custom-node",
+        "z": "a151fd919366c960",
+        "name": "Agent User Instruction ",
+        "mode": "json",
+        "jsonContent": "{\n  \"dataset\": \"File Manager\",\n  \"items\": [\n    {\n      \"messages\": [\n        {\n          \"role\": \"system\",\n          \"content\": \"You are a file  expert, use  CsvTools,ShellTools and fileTools if necessary \"\n        },\n        {\n          \"role\": \"user\",\n          \"content\": \"pls list file in base directory and find test.csv, if found read rows in a tabular format \"\n        }\n      ]\n    }\n  ]\n}",
+        "textContent": "",
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "234844e3557dec53",
+                "13d8f1552101351a"
+            ]
+        ]
+    },
+    {
+        "id": "058223e7b1508d5c",
+        "type": "inject",
+        "z": "a151fd919366c960",
+        "name": "Generate Agent",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "start",
+        "payloadType": "str",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "516beec7ec6da616",
+                "148b7fd53586b4b7"
+            ]
+        ]
+    },
+    {
+        "id": "f7816b63cff4e109",
+        "type": "debug",
+        "z": "a151fd919366c960",
+        "name": "agent genaration debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "234844e3557dec53",
+        "type": "debug",
+        "z": "a151fd919366c960",
+        "name": "config debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4dce023c3728b749",
+        "type": "exec",
+        "z": "a151fd919366c960",
+        "command": "powershell -ExecutionPolicy Bypass -File location\\setup.ps1",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Validate Environment",
+        "x": 440,
+        "y": 300,
+        "wires": [
+            [
+                "11176aea0babb271"
+            ],
+            [
+                "0a2f4bf61849ecb5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5798a4291a707096",
+        "type": "debug",
+        "z": "a151fd919366c960",
+        "name": "output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "fca68630953b5d7f",
+        "type": "debug",
+        "z": "a151fd919366c960",
+        "name": "error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c14cce2f3c8d93e1",
+        "type": "inject",
+        "z": "a151fd919366c960",
+        "name": "Validate Environment",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "start",
+        "payloadType": "str",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "4dce023c3728b749"
+            ]
+        ]
+    },
+    {
+        "id": "11176aea0babb271",
+        "type": "function",
+        "z": "a151fd919366c960",
+        "name": "buffer_management",
+        "func": "// Initialize the buffer in the node's context\ncontext.buffer = context.buffer || \"\";\n\n// 1. Convert incoming payload to string safely (handles Unicode/Emojis)\nlet input = \"\";\ntry {\n    input = (Buffer.isBuffer(msg.payload)) ? msg.payload.toString('utf8') : msg.payload;\n} catch (e) {\n    node.error(\"Encoding error: \" + e.message);\n    return null;\n}\n\n// Ignore exit code objects\nif (typeof input !== 'string') return null;\n\n// 2. Accumulate the input into our buffer\ncontext.buffer += input;\n\n// 3. Process the buffer if it's getting large or has a newline\nif (context.buffer.length > 500 || input.includes('\\n')) {\n    const LIMIT = 950; // Safety limit for Debug sidebar\n\n    // While the buffer is larger than our safety limit, slice it\n    while (context.buffer.length >= LIMIT) {\n        let chunk = context.buffer.substring(0, LIMIT);\n        context.buffer = context.buffer.substring(LIMIT);\n\n        node.send({ payload: chunk, topic: \"python_log_chunk\" });\n    }\n\n    // If the process ended (input was small) or we have a complete line,\n    // send the remainder of the buffer\n    if (input.includes('\\n') && context.buffer.length > 0) {\n        node.send({ payload: context.buffer, topic: \"python_log_line\" });\n        context.buffer = \"\"; // Clear buffer after sending full line\n    }\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 220,
+        "wires": [
+            [
+                "5798a4291a707096"
+            ]
+        ]
+    },
+    {
+        "id": "0a2f4bf61849ecb5",
+        "type": "function",
+        "z": "a151fd919366c960",
+        "name": "buffer_management",
+        "func": "// Initialize the buffer in the node's context\ncontext.buffer = context.buffer || \"\";\n\n// 1. Convert incoming payload to string safely (handles Unicode/Emojis)\nlet input = \"\";\ntry {\n    input = (Buffer.isBuffer(msg.payload)) ? msg.payload.toString('utf8') : msg.payload;\n} catch (e) {\n    node.error(\"Encoding error: \" + e.message);\n    return null;\n}\n\n// Ignore exit code objects\nif (typeof input !== 'string') return null;\n\n// 2. Accumulate the input into our buffer\ncontext.buffer += input;\n\n// 3. Process the buffer if it's getting large or has a newline\nif (context.buffer.length > 500 || input.includes('\\n')) {\n    const LIMIT = 950; // Safety limit for Debug sidebar\n\n    // While the buffer is larger than our safety limit, slice it\n    while (context.buffer.length >= LIMIT) {\n        let chunk = context.buffer.substring(0, LIMIT);\n        context.buffer = context.buffer.substring(LIMIT);\n\n        node.send({ payload: chunk, topic: \"python_log_chunk\" });\n    }\n\n    // If the process ended (input was small) or we have a complete line,\n    // send the remainder of the buffer\n    if (input.includes('\\n') && context.buffer.length > 0) {\n        node.send({ payload: context.buffer, topic: \"python_log_line\" });\n        context.buffer = \"\"; // Clear buffer after sending full line\n    }\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 280,
+        "wires": [
+            [
+                "fca68630953b5d7f"
+            ]
+        ]
+    },
+    {
+        "id": "7b6256c0e05948dc",
+        "type": "exec",
+        "z": "a151fd919366c960",
+        "command": "location\\python.exe  location\\ether_agent.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Run Agent",
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "fc13bfdd946f2ac7"
+            ],
+            [
+                "398e13a4a6adc1c4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3d763784cc16f66d",
+        "type": "debug",
+        "z": "a151fd919366c960",
+        "name": "output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e7639e656747c7ce",
+        "type": "debug",
+        "z": "a151fd919366c960",
+        "name": "error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "3915c1983068bf54",
+        "type": "inject",
+        "z": "a151fd919366c960",
+        "name": "Run Agent",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "start",
+        "payloadType": "str",
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "7b6256c0e05948dc"
+            ]
+        ]
+    },
+    {
+        "id": "fc13bfdd946f2ac7",
+        "type": "function",
+        "z": "a151fd919366c960",
+        "name": "buffer_management",
+        "func": "// Initialize the buffer in the node's context\ncontext.buffer = context.buffer || \"\";\n\n// 1. Convert incoming payload to string safely (handles Unicode/Emojis)\nlet input = \"\";\ntry {\n    input = (Buffer.isBuffer(msg.payload)) ? msg.payload.toString('utf8') : msg.payload;\n} catch (e) {\n    node.error(\"Encoding error: \" + e.message);\n    return null;\n}\n\n// Ignore exit code objects\nif (typeof input !== 'string') return null;\n\n// 2. Accumulate the input into our buffer\ncontext.buffer += input;\n\n// 3. Process the buffer if it's getting large or has a newline\nif (context.buffer.length > 500 || input.includes('\\n')) {\n    const LIMIT = 950; // Safety limit for Debug sidebar\n\n    // While the buffer is larger than our safety limit, slice it\n    while (context.buffer.length >= LIMIT) {\n        let chunk = context.buffer.substring(0, LIMIT);\n        context.buffer = context.buffer.substring(LIMIT);\n\n        node.send({ payload: chunk, topic: \"python_log_chunk\" });\n    }\n\n    // If the process ended (input was small) or we have a complete line,\n    // send the remainder of the buffer\n    if (input.includes('\\n') && context.buffer.length > 0) {\n        node.send({ payload: context.buffer, topic: \"python_log_line\" });\n        context.buffer = \"\"; // Clear buffer after sending full line\n    }\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 400,
+        "wires": [
+            [
+                "3d763784cc16f66d"
+            ]
+        ]
+    },
+    {
+        "id": "398e13a4a6adc1c4",
+        "type": "function",
+        "z": "a151fd919366c960",
+        "name": "buffer_management",
+        "func": "// Initialize the buffer in the node's context\ncontext.buffer = context.buffer || \"\";\n\n// 1. Convert incoming payload to string safely (handles Unicode/Emojis)\nlet input = \"\";\ntry {\n    input = (Buffer.isBuffer(msg.payload)) ? msg.payload.toString('utf8') : msg.payload;\n} catch (e) {\n    node.error(\"Encoding error: \" + e.message);\n    return null;\n}\n\n// Ignore exit code objects\nif (typeof input !== 'string') return null;\n\n// 2. Accumulate the input into our buffer\ncontext.buffer += input;\n\n// 3. Process the buffer if it's getting large or has a newline\nif (context.buffer.length > 500 || input.includes('\\n')) {\n    const LIMIT = 950; // Safety limit for Debug sidebar\n\n    // While the buffer is larger than our safety limit, slice it\n    while (context.buffer.length >= LIMIT) {\n        let chunk = context.buffer.substring(0, LIMIT);\n        context.buffer = context.buffer.substring(LIMIT);\n\n        node.send({ payload: chunk, topic: \"python_log_chunk\" });\n    }\n\n    // If the process ended (input was small) or we have a complete line,\n    // send the remainder of the buffer\n    if (input.includes('\\n') && context.buffer.length > 0) {\n        node.send({ payload: context.buffer, topic: \"python_log_line\" });\n        context.buffer = \"\"; // Clear buffer after sending full line\n    }\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 440,
+        "wires": [
+            [
+                "e7639e656747c7ce"
+            ]
+        ]
+    },
+    {
+        "id": "13d8f1552101351a",
+        "type": "agent-generation",
+        "z": "a151fd919366c960",
+        "name": "",
+        "savePath": "location",
+        "zipName": "agent_bundle",
+        "x": 670,
+        "y": 60,
+        "wires": [
+            [
+                "f7816b63cff4e109"
+            ]
+        ]
+    },
+    {
+        "id": "2a704a822729e111",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-my-custom-node": "1.0.0",
+            "node-red-contrib-agno-agent-gen": "1.1.0"
+        }
+    }
+]
